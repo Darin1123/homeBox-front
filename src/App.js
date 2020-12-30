@@ -5,6 +5,7 @@ import SignIn from "./page/SignIn";
 import Main from "./page/Main";
 import SignUp from "./page/SignUp";
 import Home from "./page/Home";
+import Profile from "./page/Profile";
 
 export default class App extends React.Component {
 
@@ -22,6 +23,9 @@ export default class App extends React.Component {
                 </Route>
                 <Route exact path={"/"}>
                     <Home/>
+                </Route>
+                <Route exact path={"/profile"}>
+                    <Profile/>
                 </Route>
             </Router>
         );

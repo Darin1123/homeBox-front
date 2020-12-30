@@ -5,7 +5,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(50, 80, 245, 0.8);
     color: #fff;
 }
 
@@ -81,10 +81,12 @@
 #list .list-item .item-options .item-option {
     margin-left: 10px;
     cursor: pointer;
+    color: rgba(0, 0, 0, 0.6);
 }
 
 #list .list-item .item-options .item-option:hover {
     text-decoration: underline;
+    color: rgba(0, 0, 0, 1);
 }
 
 .disabled-item-option {
@@ -94,6 +96,10 @@
 
 #list .list-item:nth-last-child(1) {
     border-bottom: none;
+}
+
+#list .list-item svg {
+    color: rgba(50, 80, 245, 0.8);
 }
 
 .item-name {
@@ -109,19 +115,27 @@
 .main-options {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    /*border: 1px red solid;*/
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
 .main-option-button {
     display: flex;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(50, 80, 245, 0.6);
     width: fit-content;
     color: #fff;
     padding: 5px 10px 5px 5px;
     border-radius: 5px;
     margin-right: 10px;
-    margin-bottom: 10px;
     cursor: pointer;
+    transition: ease-in-out 0.1s;
+}
+
+.main-option-button:hover {
+    background-color: rgba(50, 80, 245, 0.8);
 }
 
 .main-option-button:nth-last-child(1) {
@@ -133,12 +147,14 @@
 }
 
 .dir-item {
-    font-weight: bold;
+    /*font-weight: bold;*/
+    color: rgba(50, 80, 245, 0.8);
     cursor: pointer;
 }
 
 .dir-item:hover {
     text-decoration: underline;
+    color: rgba(50, 80, 255, 1);
 }
 
 #empty-msg {
@@ -245,4 +261,47 @@
     outline: none;
     padding: 10px;
     text-align: center;
+}
+
+#main-user-menu {
+    position: absolute;
+    background-color: rgba(51, 51, 51, 1);
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60px;
+    /*visibility: hidden;*/
+}
+
+#main-user {
+    width: 80px;
+    /*border: 1px solid red;*/
+    text-align: right;
+}
+
+#main-user-link {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#main-user-link:hover {
+    text-decoration: underline;
+}
+
+#refresh-button {
+    color: rgba(50, 80, 245, 0.8);
+    cursor: pointer;
+}
+
+#main-go-back-button {
+    color: rgba(50, 80, 245, 0.8);
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#main-go-back-button:hover {
+    text-decoration: underline;
 }

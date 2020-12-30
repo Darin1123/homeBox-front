@@ -1,11 +1,12 @@
 import "./Main.css";
 import React from "react";
 import axios from "axios";
-import {Add, ArrowBack, ArrowRight, ArrowUpward, Folder, Refresh} from "@material-ui/icons";
+import {Add, ArrowRight, ArrowUpward, Folder, Refresh} from "@material-ui/icons";
 import {DIST} from "../config";
 import {Redirect} from "react-router";
 import $ from "jquery";
 import DownloadButton from "../DownloadButton";
+import {Link} from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 const dist = DIST;
@@ -19,7 +20,8 @@ export default class Main extends React.Component {
             user: null,
             loadingUserInfo: true,
             loadingList: true,
-            dialogOn: false
+            dialogOn: false,
+            uploading: false,
         };
     }
 
@@ -276,6 +278,9 @@ export default class Main extends React.Component {
                 this.showErrorMsg("文件不能为空");
                 return;
             }
+            this.setState({
+                uploading: true
+            });
             let formData = new FormData();
             formData.append("path", this.getPath());
             formData.append("file", file);
@@ -292,6 +297,9 @@ export default class Main extends React.Component {
                 .then((response)=>{
                     console.log("uploaded");
                     console.log(response);
+                    this.setState({
+                        uploading: false
+                    });
                     this.closeDialog();
                     this.closeErrorMsg();
                     this.refresh();
@@ -412,6 +420,7 @@ export default class Main extends React.Component {
         console.log("mount");
         const userResponse = await this.getUser();
         const user = await userResponse.data;
+        console.log(user);
         this.setState({
             user: user,
             loadingUserInfo: false
@@ -430,7 +439,7 @@ export default class Main extends React.Component {
     render() {
         // console.log("render");
         if (this.state.loadingUserInfo) {
-            return (<div>加载中...</div>);
+            return (<div><span>加载中...</span><div><span>若长时间未响应, 请</span><Link to={"sign-in"}>重新登录</Link></div></div>);
         }
         if (!this.state.user) {
             return (<Redirect to={"sign-in"}/>);
@@ -451,9 +460,8 @@ export default class Main extends React.Component {
                                     {item.name}
                                 </span>
                             <div className={"item-options"}>
-                                {item.file && this.state.loadingDownload && (<span>准备下载...</span>)}
-                                {item.file && !this.state.loadingDownload && (
-                                    <DownloadButton className={"item-option"} download={this.download.bind(this, item.name)}/>
+                                {item.file && (
+                                    <DownloadButton className={"item-option"} getPath={this.getPath.bind(this)} name={item.name}/>
                                 )}
                                 {this.state.loadingDownload?
                                     <span className={"disabled-item-option"}>删除</span>:<span className={"item-option"} onClick={()=>this.delete(item)}>删除</span>
@@ -472,6 +480,7 @@ export default class Main extends React.Component {
                 <div id={"dialog"}>
                     <label id={"dialog-label"}>标题</label>
                     <div id={"message"}>错误消息</div>
+                    {this.state.uploading && <div>正在上传...</div>}
                     <input id={"dialog-input"}/>
                     <div className={"dialog-buttons"}>
                         <div className={"dialog-confirm"} id={"confirm"}>确定</div>
@@ -489,17 +498,17 @@ export default class Main extends React.Component {
                             )}
                         </div>
                         <div id={"main-user"}>
-                            <span>{this.state.user.name}</span>
+                            <Link id={"main-user-link"} to={"/profile"}>{this.state.user.name}</Link>
                         </div>
                     </div>
                 </div>
                 <div id={"main-body"}>
                     <div className={"container"}>
                         <div className={"main-options"}>
-                            <div className={"main-option-button"} onClick={()=>this.refresh()}><Refresh/>刷新</div>
+                            <div id={"refresh-button"} onClick={()=>this.refresh()}><Refresh/></div>
                             {
                                 this.state.path.length>1 &&
-                                <div className={"main-option-button"} onClick={()=>this.goBack()}><ArrowBack/>返回上级</div>
+                                <div id={"main-go-back-button"} onClick={()=>this.goBack()}>返回上级</div>
                             }
                         </div>
                         <div className={"main-options"}>

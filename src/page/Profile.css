@@ -1,0 +1,103 @@
+#profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#profile {
+    width: calc(100% - 20px);
+    padding: 10px;
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-button {
+    cursor: pointer;
+    margin-right: 5px;
+    color: rgba(50, 80, 245, 0.8);
+}
+
+.edit-button:hover {
+    text-decoration: underline;
+}
+
+#user-name-text {
+    margin-right: 10px;
+}
+
+#user-password {
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    /*width: fit-content;*/
+    /*border: 1px solid red;*/
+}
+
+.change-password-input {
+    width: 240px;
+    font-size: 16px;
+    margin-bottom: 16px;
+    margin-top: 8px;
+}
+
+#change-password-buttons {
+    display: flex;
+    /*justify-content: flex-end;*/
+    /*border: 1px solid red;*/
+}
+
+#go-back-button {
+    text-decoration: none;
+    background-color: rgba(50, 80, 245, 0.8);
+    color: #fff;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#edit-name {
+    display: flex;
+    flex-direction: row;
+}
+
+#user-name-input {
+    font-size: 16px;
+    -webkit-appearance: none;
+    color: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    margin: 0 10px 0 5px;
+}
+
+#user-name-input:focus {
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.14);
+}
+
+#saving-name {
+    margin-right: 10px;
+}
+
+.change-password-input {
+    font-size: 16px;
+    -webkit-appearance: none;
+    color: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.change-password-input:focus {
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.14);
+}
+
+#edit-name-state {
+    margin-right: 5px;
+}
+
+#reset-password {
+    width: fit-content;
+}

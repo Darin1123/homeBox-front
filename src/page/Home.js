@@ -11,7 +11,7 @@ export default class Home extends React.Component {
                     <p>HomeBox 是一个简单的家庭网盘.</p>
                 </div>
                 <div id={"home-links"}>
-                    <span>请 <Link className={"home-link"} to={"sign-in"}>登录</Link> 或者
+                    <span>请&nbsp;<Link className={"home-link"} to={"sign-in"}>登录</Link>&nbsp;或者&nbsp;
                     <Link className={"home-link"} to={"sign-up"}>注册</Link></span>
                 </div>
             </div>

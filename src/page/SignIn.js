@@ -9,16 +9,36 @@ axios.defaults.withCredentials = true;
 const dist = DIST;
 
 export default class SignIn extends React.Component {
+    state = {
+        authenticating: false
+    };
+
+    showErrorMsg(message) {
+        let msg = $("#sign-in-message");
+        msg.css({display: "block"});
+        msg.text(message);
+    }
 
     signIn() {
+        this.closeErrorMsg();
         let username = $("#username").val();
         let password = $("#password").val();
-        // let username = "13703089169";
+        // let username = "13924809700";
         // let password = "Ww@772438058";
-        let msg = $("#error-message");
+        let msg = $("#sign-in-message");
+        if (username === "") {
+            this.showErrorMsg("用户名不能为空")
+            return;
+        } else if (password === "") {
+            this.showErrorMsg("密码不能为空")
+            return;
+        }
+        this.setState({
+            authenticating: true
+        });
         let config = {
             method: 'post',
-            url: "http://"+dist+"/homeBox/account/login",
+            url: "http://" + dist + "/homeBox/account/login",
             data: {
                 username: username,
                 password: password
@@ -27,11 +47,14 @@ export default class SignIn extends React.Component {
 
         axios(config)
             .then((response) => {
+                this.setState({
+                    authenticating: false
+                });
                 let code = response.data.code;
-                if (code!==0) {
+                if (code !== 0) {
                     // console.log(code);
                     msg.css({display: "block"});
-                    if (code===20003) {
+                    if (code === 20003) {
                         msg.text("用户名/密码错误.");
                     } else {
                         msg.text("登录失败, 请重试.");
@@ -40,11 +63,18 @@ export default class SignIn extends React.Component {
                     window.location.hash = "/homeBox";
                 }
             })
-            .catch(function (error) {
+            .catch((error) => {
+                this.setState({
+                    authenticating: false
+                });
                 msg.css({display: "block"});
                 msg.text("无法连接到服务器.");
                 console.log(error);
             });
+    }
+
+    closeErrorMsg() {
+        $("#sign-in-message").css({display: "none"});
     }
 
     render() {
@@ -52,7 +82,8 @@ export default class SignIn extends React.Component {
             <div id={"sign-in-main"}>
                 <div id={"sign-in-form"}>
                     <span id={"sign-in-title"}>请登录</span>
-                    <div id={"error-message"}/>
+                    <div id={"sign-in-message"}/>
+                    {this.state.authenticating && <div>登录中...</div>}
                     <div className={"sign-in-item"}>
                         <label>用户名</label>
                         <input id={"username"} label={"Username"}/>

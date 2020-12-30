@@ -63,22 +63,24 @@ label {
     cursor: pointer;
     font-size: 16px;
     width: calc(100% - 10px);
-    text-align: center;
     height: 24px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(50, 80, 245, 0.8);
     color: #fff;
     font-weight: bold;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#error-message {
+#sign-in-message {
     text-align: center;
     width: calc(100% - 12px);
     margin-bottom: 10px;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(255, 0, 0, 0.6);
     color: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 4px rgba(255, 0, 0, 0.2);
     padding: 5px;
     display: none;
 }
