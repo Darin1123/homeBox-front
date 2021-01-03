@@ -512,10 +512,11 @@ export default class Main extends React.Component {
                             }
                         </div>
                         <div className={"main-options"}>
-                            <div className={"main-option-button"} onClick={()=>this.upload()}><ArrowUpward/>上传新文件</div>
-                            <div className={"main-option-button"} onClick={()=>this.mkdir()}><Add/>新建文件夹</div>
+                            <div className={"main-option-button"} onClick={()=>this.upload()}><ArrowUpward/>上传</div>
+                            <div className={"create-folder-button"} onClick={()=>this.mkdir()}><Add/>新建文件夹</div>
                         </div>
                     </div>
+                    <div id={"items-info"}>共加载了{this.state.items.length}个项目</div>
                     {this.state.items.length===0 && <div id={"empty-msg"}>空空如也...</div>}
                     {list}
                 </div>
