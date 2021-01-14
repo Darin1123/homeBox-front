@@ -2,11 +2,12 @@ import "./Main.css";
 import React from "react";
 import axios from "axios";
 import {Add, ArrowRight, ArrowUpward, Folder, Refresh} from "@material-ui/icons";
-import {DIST} from "../config";
+import {DIST} from "../config/config";
 import {Redirect} from "react-router";
 import $ from "jquery";
-import DownloadButton from "../DownloadButton";
+import DownloadButton from "../component/DownloadButton";
 import {Link} from "react-router-dom";
+import {preProcessFileName} from "../util/stringUtils";
 
 axios.defaults.withCredentials = true;
 const dist = DIST;
@@ -454,10 +455,10 @@ export default class Main extends React.Component {
                         <div className={"list-item"} key={key}>
                                 <span
                                     className={"item-name "+(!item.file? "dir-item":"")}
-                                    onClick={!item.file?()=>this.toDir(item.name):()=>{}}
+                                    onClick={!item.file?()=>this.toDir(preProcessFileName(item.name)):()=>{}}
                                 >
                                     {!item.file && (<Folder/>)}
-                                    {item.name}
+                                    {preProcessFileName(item.name)}
                                 </span>
                             <div className={"item-options"}>
                                 {item.file && (

@@ -2,7 +2,7 @@ import "./SignUp.css";
 import React from "react";
 import $ from "jquery";
 import axios from "axios";
-import {DIST} from "../config";
+import {DIST} from "../config/config";
 import {Link} from "react-router-dom";
 
 axios.defaults.withCredentials = true;

@@ -1,11 +1,11 @@
 import React from "react";
 import {HashRouter as Router} from "react-router-dom";
 import {Route} from "react-router";
-import SignIn from "./page/SignIn";
-import Main from "./page/Main";
-import SignUp from "./page/SignUp";
-import Home from "./page/Home";
-import Profile from "./page/Profile";
+import SignIn from "./SignIn";
+import Main from "./Main";
+import SignUp from "./SignUp";
+import Home from "./Home";
+import Profile from "./Profile";
 
 export default class App extends React.Component {
 

@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import {DIST} from "./config";
+import {DIST} from "../config/config";
 
 axios.defaults.withCredentials = true;
 const dist = DIST;

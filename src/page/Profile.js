@@ -2,7 +2,7 @@ import "./Profile.css";
 import React from "react";
 import {Redirect} from "react-router";
 import axios from "axios";
-import {DIST} from "../config";
+import {DIST} from "../config/config";
 import $ from "jquery";
 import {Link} from "react-router-dom";
 
