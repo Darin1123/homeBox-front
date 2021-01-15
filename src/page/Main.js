@@ -2,7 +2,7 @@ import "./Main.css";
 import React from "react";
 import axios from "axios";
 import {Add, ArrowRight, ArrowUpward, Folder, Refresh} from "@material-ui/icons";
-import {DIST} from "../config/config";
+import {DIST, serverConfig} from "../config/config";
 import {Redirect} from "react-router";
 import $ from "jquery";
 import DownloadButton from "../component/DownloadButton";
@@ -11,6 +11,7 @@ import {preProcessFileName} from "../util/stringUtils";
 
 axios.defaults.withCredentials = true;
 const dist = DIST;
+const themeColor = serverConfig.appearance.theme.color;
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -445,7 +446,7 @@ export default class Main extends React.Component {
         if (!this.state.user) {
             return (<Redirect to={"sign-in"}/>);
         }
-        let list;
+        let list, breadCrumb;
         if (this.state.loadingList) {
             list = (<div>加载中...</div>);
         } else {
@@ -476,6 +477,36 @@ export default class Main extends React.Component {
                 </div>
             );
         }
+        if (this.state.path.length<4) {
+            breadCrumb = (<div id={"breadcrumbs"}>
+                {this.state.path.map((item, key) =>
+                    <div className={"path-item"} key={key}>
+                        {key !== 0 && <ArrowRight/>}
+                        <div className={"path-item-info"} onClick={()=>this.goToPath(key)}>{item}</div>
+                    </div>
+                )}
+            </div>);
+        } else { // this part feels like hard coded
+            let home = this.state.path[0];
+            let size = this.state.path.length;
+            breadCrumb = (<div id={"breadcrumbs"}>
+                <div className={"path-item"} >
+                    <div className={"path-item-info"}
+                         onClick={()=>this.goToPath(0)}>{home}</div>
+                </div>
+                <div className={"path-item"}><ArrowRight/>...</div>
+                <div className={"path-item"}><ArrowRight/>
+                    <div className={"path-item-info"}
+                         onClick={()=>this.goToPath(size-2)}
+                    >{this.state.path[size-2]}</div>
+                </div>
+                <div className={"path-item"}><ArrowRight/>
+                    <div className={"path-item-info"}
+                         onClick={()=>this.goToPath(size-1)}
+                    >{this.state.path[size-1]}</div>
+                </div>
+            </div>);
+        }
         return (
             <div>
                 <div id={"dialog"}>
@@ -490,14 +521,15 @@ export default class Main extends React.Component {
                 </div>
                 <div id={"main-nav"}>
                     <div className={"container"}>
-                        <div id={"breadcrumbs"}>
-                            {this.state.path.map((item, key) =>
-                                <div className={"path-item"} key={key}>
-                                    {key !== 0 && <ArrowRight/>}
-                                    <div className={"path-item-info"} onClick={()=>this.goToPath(key)}>{item}</div>
-                                </div>
-                            )}
-                        </div>
+                        {/*<div id={"breadcrumbs"}>*/}
+                        {/*    {this.state.path.map((item, key) =>*/}
+                        {/*        <div className={"path-item"} key={key}>*/}
+                        {/*            {key !== 0 && <ArrowRight/>}*/}
+                        {/*            <div className={"path-item-info"} onClick={()=>this.goToPath(key)}>{item}</div>*/}
+                        {/*        </div>*/}
+                        {/*    )}*/}
+                        {/*</div>*/}
+                        {breadCrumb}
                         <div id={"main-user"}>
                             <Link id={"main-user-link"} to={"/profile"}>{this.state.user.name}</Link>
                         </div>
